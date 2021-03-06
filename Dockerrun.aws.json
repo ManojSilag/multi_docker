@@ -1,0 +1,38 @@
+{
+ "AWSEBDockerrunVersion": 2,
+ "containerDefinitions": [
+     {
+         "name": "client",
+         "image": "manojsilag/multi-client",
+         "hostname": "client",
+         "essential": false
+     },
+     {
+        "name": "server",
+        "image": "manojsilag/multi-server",
+        "hostname": "api",
+        "essential": false
+    },
+    {
+        "name": "worker",
+        "image": "manojsilag/multi-worker",
+        "hostname": "worker",
+        "essential": false
+    },
+    {
+        "name":"nginx",
+        "image": "manojsilag/multi-nginx",
+        "hostname": "nginx",
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 80,
+                "containerPort": 80
+            }
+        ],
+        "links":["client", "server"]
+
+    }
+ ]
+
+}
